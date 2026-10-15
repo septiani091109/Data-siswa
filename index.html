@@ -1,0 +1,119 @@
+!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Biodata Siswa</title>
+
+  <!-- Font Google (boleh dihapus; kalau gagal dimuat, browser pakai font sistem) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #eef2f7;
+      --kartu: #ffffff;
+      --teks: #14213d;
+      --teks-redup: #5b667a;
+      --garis: #d6dde8;
+      --aksen: #1d4ed8;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0e1522;
+        --kartu: #172033;
+        --teks: #e8edf6;
+        --teks-redup: #98a4ba;
+        --garis: #2a3650;
+        --aksen: #6c9bff;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--teks);
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    .wadah { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+
+    header h1 { margin: 0 0 4px; font-size: 1.75rem; font-weight: 800; }
+    header p  { margin: 0; color: var(--teks-redup); }
+
+    /* Kolom pencarian dan filter */
+    .kontrol { display: flex; gap: 10px; flex-wrap: wrap; margin: 20px 0 8px; }
+    .kontrol input, .kontrol select {
+      font: inherit;
+      color: var(--teks);
+      background: var(--kartu);
+      border: 1px solid var(--garis);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    .kontrol input  { flex: 1 1 220px; }
+    .kontrol select { flex: 0 1 160px; }
+    .kontrol input:focus-visible, .kontrol select:focus-visible {
+      outline: 2px solid var(--aksen);
+      outline-offset: 1px;
+    }
+
+    .jumlah { color: var(--teks-redup); font-size: 0.9rem; margin: 0 0 16px; }
+
+    /* Susunan kartu: otomatis menyesuaikan lebar layar (HP = 1 kolom) */
+    .daftar {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    /* Kartu dibuat mirip kartu pelajar: pita warna di atas, foto bulat menimpa pita */
+    .kartu {
+      background: var(--kartu);
+      border: 1px solid var(--garis);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .pita { height: 56px; background: hsl(var(--hue) 65% 45%); }
+    .isi  { padding: 0 16px 16px; text-align: center; }
+
+    .foto {
+      width: 76px; height: 76px;
+      margin: -38px auto 8px;
+      border-radius: 50%;
+      border: 4px solid var(--kartu);
+      background: hsl(var(--hue) 55% 88%);
+      color: hsl(var(--hue) 65% 28%);
+      display: grid; place-items: center;
+      font-weight: 800; font-size: 1.5rem;
+      overflow: hidden;
+    }
+    .foto img { width: 100%; height: 100%; object-fit: cover; }
+
+    .nama { margin: 0; font-size: 1.05rem; font-weight: 800; }
+    .nis  { margin: 0 0 12px; color: var(--teks-redup); font-size: 0.85rem; }
+
+    .rincian { margin: 0; text-align: left; font-size: 0.9rem; }
+    .rincian div {
+      display: flex; justify-content: space-between; gap: 12px;
+      padding: 6px 0; border-top: 1px solid var(--garis);
+    }
+    .rincian dt { color: var(--teks-redup); }
+    .rincian dd { margin: 0; font-weight: 600; text-align: right; }
+
+    /* Pesan status: memuat, kosong, galat */
+    .pesan {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 40px 16px;
+      color: var(--teks-redup);
+    }
+    .pesan.galat { color: #b42318; }
+    @media (prefers-color-scheme: dark) { .pesan.galat { color: #ff8b80; } }
+  </style>
+</head>
+<body>
